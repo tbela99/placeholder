@@ -12,7 +12,7 @@ Include the script and add a class "placeholder" to any form control you wish to
 	
 		<input type="text" class="placeholder" value="Name"/>
 		<input type="password" class="placeholder" value="Password"/>
-		<textarea class="placeholder">Your message...<textarea/>
+		<textarea class="placeholder">Your message...</textarea>
 
 you can also add the functionality manually by calling the method *autoempty* on an element like this
 	 
