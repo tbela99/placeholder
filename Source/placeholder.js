@@ -1,11 +1,17 @@
 /*
+---
+script: placeholder.js
+license: MIT-style license.
+description: cross browser placeholder. include the js and add the class placeholder to your input/textarea.
+copyright: Copyright (c) 2010 Thierry Bela
+authors: [Thierry Bela]
 
-cross browser placeholder implementation. include the js and add the class placeholder to your input/textarea
-
-usage:
-
-<input type="text" class="placeholder" value="Your name..."/>
-<textarea class="placeholder">Your message...<textarea/>
+requires: 
+  core:1.2.3: 
+  - Element.Event
+  - Element.Style
+provides: none
+...
 */
 
 (function () {
