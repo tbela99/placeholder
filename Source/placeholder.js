@@ -33,7 +33,7 @@ provides: none
 		
 			if(isNative) {
 			
-				this.placeholder = this.value;
+				this.placeholder = this.defaultValue;
 				this.value = '';
 				
 			} else {
