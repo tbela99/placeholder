@@ -20,6 +20,6 @@ you can also add the functionality manually by calling the method *autoempty* on
 
 	var name = $(form.name);
 	
-	//the current value of name will be used as the placeholder
+	//the default value of name will be used as the placeholder
 	name.autoempty();
 
