@@ -16,12 +16,6 @@ provides: none
 
 (function () {
 
-	var key = 'placeholder',
-		isNative = key in document.createElement('input'),
-		pcolor = '#aaa',
-		color,
-		defaultValue;
-		
 	function focus(el) {
 	
 		if(el.value == el.defaultValue) el.value = '';
@@ -30,7 +24,13 @@ provides: none
 	Element.implement({
 	
 		autoempty: function () {
-		
+				
+			var key = 'placeholder',
+				isNative = key in document.createElement('input'),
+				pcolor = '#aaa',
+				color,
+				defaultValue;
+				
 			if(isNative) {
 			
 				this.placeholder = this.defaultValue;
