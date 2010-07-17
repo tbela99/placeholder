@@ -21,7 +21,7 @@ you can also add the functionality manually by calling the method *autoempty* on
 	var control = $(form.control);
 	
 	//the default value of name will be used as the placeholder
-	name.autoempty();
+	control.autoempty();
 	
 	//change the placeholder text to 'Please type your name'
-	name.autoempty('Please type your name');
+	control.autoempty('Please type your name');
