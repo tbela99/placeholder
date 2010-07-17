@@ -26,9 +26,11 @@ provides: none
 		autoempty: function (placeholder) {
 				
 			var key = 'placeholder',
+				evt = 'placeholder:events',
 				isNative = key in document.createElement('input'),
 				pcolor = '#aaa',
-				color;
+				color,
+				events;
 				
 				placeholder = placeholder || this.defaultValue;
 				
@@ -40,10 +42,11 @@ provides: none
 			} else {
 			
 				color = this.style.color;
+				events = this.retrieve(evt);
 				
-				if(this.value == placeholder) this.style.color = pcolor;
+				if(events) this.removeEvents(events);
 				
-				this.store('placeholder', placeholder).addEvents({
+				events = {
 				
 					focus: function () {
 					
@@ -53,7 +56,11 @@ provides: none
 					
 						if(this.value == '') this.setStyle('color', pcolor).value = placeholder
 					}
-				});
+				};
+				
+				if(this.value == placeholder) this.style.color = pcolor;
+				
+				this.store('placeholder', placeholder).store(evt, events).addEvents(events);
 					
 				var form = $(this.form);
 				
