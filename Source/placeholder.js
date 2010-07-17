@@ -18,32 +18,32 @@ provides: none
 
 	function focus(el) {
 	
-		if(el.value == el.defaultValue) el.value = '';
+		if(el.value == el.retrieve('placeholder')) el.value = '';
 	}
 	
 	Element.implement({
 	
-		autoempty: function () {
+		autoempty: function (placeholder) {
 				
 			var key = 'placeholder',
 				isNative = key in document.createElement('input'),
 				pcolor = '#aaa',
-				color,
-				defaultValue;
+				color;
+				
+				placeholder = placeholder || this.defaultValue;
 				
 			if(isNative) {
 			
-				this.placeholder = this.defaultValue;
+				this.placeholder = placeholder;
 				this.value = '';
 				
 			} else {
 			
 				color = this.style.color;
-				defaultValue = this.defaultValue;
 				
-				if(this.value == defaultValue) this.style.color = pcolor;
+				if(this.value == placeholder) this.style.color = pcolor;
 				
-				this.addEvents({
+				this.store('placeholder', placeholder).addEvents({
 				
 					focus: function () {
 					
@@ -51,7 +51,7 @@ provides: none
 					},
 					blur: function () {
 					
-						if(this.value == '') this.setStyle('color', pcolor).value = defaultValue
+						if(this.value == '') this.setStyle('color', pcolor).value = placeholder
 					}
 				});
 					

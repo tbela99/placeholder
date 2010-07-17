@@ -14,12 +14,14 @@ Include the script and add a class "placeholder" to any form control you wish to
 		<input type="password" class="placeholder" value="Password"/>
 		<textarea class="placeholder">Your message...</textarea>
 
-you can also add the functionality manually by calling the method *autoempty* on an element like this
+you can also add the functionality manually by calling the method *autoempty* on an element like this. you can pass the text to use as placeholder to autoempty, if you do not specify a text, the default value is used.
 	 
 ### Javascript:
 
-	var name = $(form.name);
+	var control = $(form.control);
 	
 	//the default value of name will be used as the placeholder
 	name.autoempty();
-
+	
+	//change the placeholder text to 'Please type your name'
+	name.autoempty('Please type your name');
