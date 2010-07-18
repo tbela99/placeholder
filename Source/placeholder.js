@@ -65,7 +65,7 @@ provides: none
 				
 				if(this.value == placeholder) this.style.color = pcolor;
 				
-				this.store('placeholder', placeholder).store(evt, events).addEvents(events)
+				this.store(evt, events).addEvents(events)
 			}
 		}
 	});
