@@ -30,14 +30,19 @@ provides: none
 				isNative = key in document.createElement('input'),
 				pcolor = '#aaa',
 				color,
-				events;
+				events,
+				form = $(this.form);
 				
-				placeholder = placeholder || this.defaultValue;
-				
-			if(isNative) {
+			if(placeholder == undefined) placeholder = this.defaultValue;
+			this.store('placeholder', placeholder);
 			
-				this.placeholder = placeholder;
-				this.value = '';
+			//fix the reset button
+			if(!form.retrieve(key)) form.store(key, true).addEvent('submit', function () { form.getElements('.placeholder').each(focus) });
+									
+			if(isNative) {
+					
+				this.placeholder = this.retrieve('placeholder');
+				if(this.value == this.placeholder) this.value = ''
 				
 			} else {
 			
@@ -60,17 +65,7 @@ provides: none
 				
 				if(this.value == placeholder) this.style.color = pcolor;
 				
-				this.store('placeholder', placeholder).store(evt, events).addEvents(events);
-					
-				var form = $(this.form);
-				
-				if(!form.retrieve(key)) {
-				
-					form.store(key, true).addEvent('submit', function () {
-					
-						form.getElements('.placeholder').each(focus)
-					})
-				}
+				this.store('placeholder', placeholder).store(evt, events).addEvents(events)
 			}
 		}
 	});
