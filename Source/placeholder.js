@@ -16,33 +16,35 @@ provides: none
 
 (function () {
 
-	function focus(el) {
-	
-		if(el.value == el.retrieve('placeholder')) el.value = '';
-	}
+	function focus(el) { if(el.value == el.retrieve('placeholder')) el.value = '' }
 	
 	Element.implement({
 	
-		autoempty: function (placeholder) {
+		autoempty: function () {
 				
 			var key = 'placeholder',
-				evt = 'placeholder:events',
+				evt = 'ph:events',
+				key_c = 'ph:color',
+				self = this,
 				isNative = key in document.createElement('input'),
-				pcolor = '#aaa',
 				color,
 				events,
-				form = $(this.form);
+				form = $(self.form),
+				params = Array.link(arguments, {options: Object.type, value: $defined}),
+				placeholder = params.value || self.retrieve(key),
+				options = params.options || {},
+				pcolor = options.color || self.retrieve(key_c, '#aaa');
 				
-			if(placeholder == undefined) placeholder = this.defaultValue;
-			this.store('placeholder', placeholder);
+			if(placeholder == undefined) placeholder = self.defaultValue;
+			self.store(key_c, pcolor).store(key, placeholder);
 			
 			//fix the reset button
 			if(!form.retrieve(key)) form.store(key, true).addEvent('submit', function () { form.getElements('.placeholder').each(focus) });
 									
 			if(isNative) {
 					
-				this.placeholder = this.retrieve('placeholder');
-				if(this.value == this.placeholder) this.value = ''
+				this.placeholder = placeholder;
+				if(this.value == placeholder) this.value = ''
 				
 			} else {
 			
@@ -67,11 +69,10 @@ provides: none
 				
 				this.store(evt, events).addEvents(events)
 			}
+			
+			return this
 		}
 	});
 	
-	window.addEvent('domready', function () {
-		
-		$$("input.placeholder,textarea.placeholder").autoempty()
-	})
+	window.addEvent('domready', function () { $$("input.placeholder,textarea.placeholder").autoempty() })
 })();
